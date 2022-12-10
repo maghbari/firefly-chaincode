@@ -22,7 +22,7 @@ func main() {
 		Address: os.Getenv("CHAINCODE_SERVER_ADDRESS"),
 	}
 
-	assetChaincode, err := contractapi.NewChaincode(&firefly.SmartContract{})
+	fireflyChaincode, err := contractapi.NewChaincode(&firefly.SmartContract{})
 
 	if err != nil {
 		log.Panicf("error create firefly chaincode: %s", err)
@@ -31,7 +31,7 @@ func main() {
 	server := &shim.ChaincodeServer{
 		CCID:     config.CCID,
 		Address:  config.Address,
-		CC:       assetChaincode,
+		CC:       fireflyChaincode,
 		TLSProps: getTLSProperties(),
 	}
 
