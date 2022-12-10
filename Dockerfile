@@ -8,6 +8,8 @@ ARG ALPINE_VER=3.16.2
 #FROM golang:${GO_VER}-alpine${ALPINE_VER}
 FROM golang:1.16-alpine
 
+RUN apk add --no-cache git
+
 # Set the Current Working Directory inside the container
 WORKDIR /tmp/chaincode-external
 # Copy local code to the container image.

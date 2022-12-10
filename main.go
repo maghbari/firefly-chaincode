@@ -22,7 +22,7 @@ func main() {
 		Address: os.Getenv("CHAINCODE_SERVER_ADDRESS"),
 	}
 
-	assetChaincode, err := contractapi.NewChaincode(&firefly.SmartContract{})
+	assetChaincode, err := contractapi.NewChaincode(&contract.SmartContract{})
 
 	if err != nil {
 		log.Panicf("error create firefly chaincode: %s", err)

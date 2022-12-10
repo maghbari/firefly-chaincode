@@ -1,4 +1,4 @@
-module github.com/maghbari/firefly-chaincode.go
+module github.com/maghbari/firefly-chaincode
 
 go 1.16
 
