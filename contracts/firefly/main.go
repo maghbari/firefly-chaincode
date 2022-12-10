@@ -1,10 +1,11 @@
-package chaincode
+// SPDX-License-Identifier: Apache-2.0
+
+package main
 
 import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
-
 	"github.com/golang/protobuf/ptypes/timestamp"
 	"github.com/hyperledger/fabric-contract-api-go/contractapi"
 )
@@ -12,6 +13,36 @@ import (
 // SmartContract provides functions for managing an Asset
 type SmartContract struct {
 	contractapi.Contract
+}
+
+// PutValue - Adds a key value pair to the world state
+func (sc *SmartContract) PutValue(ctx contractapi.TransactionContextInterface, key string, value string) error {
+	return ctx.GetStub().PutState(key, []byte(value))
+}
+
+// GetValue - Gets the value for a key from the world state
+func (sc *SmartContract) GetValue(ctx contractapi.TransactionContextInterface, key string) (string, error) {
+	bytes, err := ctx.GetStub().GetState(key)
+
+	if err != nil {
+		return "", nil
+	}
+
+	return string(bytes), nil
+}
+
+func main() {
+	SmartContract := new(SmartContract)
+
+	cc, err := contractapi.NewChaincode(SmartContract)
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	if err := cc.Start(); err != nil {
+		panic(err.Error())
+	}
 }
 
 type BatchPinEvent struct {
